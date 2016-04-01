@@ -9,6 +9,12 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
 
 //@SpringBootApplication(exclude = { SecurityAutoConfiguration.class, SecurityFilterAutoConfiguration.class })
+/**
+ * This type ... (missing JavaDoc in generated code)
+ *
+ * @author jrichter
+ * @since 0.0.1
+ */
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
 @EntityScan(basePackages = { "eu.jprichter.eventplanning" }, basePackageClasses = { AdvancedRevisionEntity.class })
 @EnableGlobalMethodSecurity(jsr250Enabled = true)

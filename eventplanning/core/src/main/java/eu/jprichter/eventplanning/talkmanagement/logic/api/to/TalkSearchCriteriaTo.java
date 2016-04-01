@@ -25,31 +25,49 @@ public class TalkSearchCriteriaTo extends SearchCriteriaTo {
     super();
   }
 
+  /**
+   * @return (missing JavaDoc in generated code)
+   */
   public String getTitle() {
 
-    return title;
+    return this.title;
   }
 
+  /**
+   * @param title (missing JavaDoc in generated code)
+   */
   public void setTitle(String title) {
 
     this.title = title;
   }
 
+  /**
+   * @return (missing JavaDoc in generated code)
+   */
   public String getSpeakerFirstName() {
 
-    return speakerFirstName;
+    return this.speakerFirstName;
   }
 
+  /**
+   * @param speakerFirstName (missing JavaDoc in generated code)
+   */
   public void setSpeakerFirstName(String speakerFirstName) {
 
     this.speakerFirstName = speakerFirstName;
   }
 
+  /**
+   * @return (missing JavaDoc in generated code)
+   */
   public String getSpeakerLastName() {
 
-    return speakerLastName;
+    return this.speakerLastName;
   }
 
+  /**
+   * @param speakerLastName (missing JavaDoc in generated code)
+   */
   public void setSpeakerLastName(String speakerLastName) {
 
     this.speakerLastName = speakerLastName;

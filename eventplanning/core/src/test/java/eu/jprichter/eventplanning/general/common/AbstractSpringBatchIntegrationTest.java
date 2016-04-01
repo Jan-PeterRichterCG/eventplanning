@@ -39,10 +39,15 @@ public abstract class AbstractSpringBatchIntegrationTest extends ComponentTest {
   /** scripts for all tests db setup */
   private static final String ALL_TESTS_DB_SETUP_DIR = "classpath:AllTests/setup/db";
 
+  /**
+   * @param login (missing JavaDoc in generated code)
+   * @param password (missing JavaDoc in generated code)
+   * @param permissions (missing JavaDoc in generated code)
+   */
   protected static void login(String login, String password, String... permissions) {
-  
+
     Set<String> groups = new HashSet<>(Arrays.asList(permissions));
-  
+
     Set<GrantedAuthority> authorities = new HashSet<>();
     for (String permission : groups) {
       authorities.add(new AccessControlGrantedAuthority(new AccessControlPermission(permission)));
@@ -51,8 +56,11 @@ public abstract class AbstractSpringBatchIntegrationTest extends ComponentTest {
         new UsernamePasswordAuthenticationToken(new UserData(login, password, authorities), password));
   }
 
+  /**
+   * (missing JavaDoc in generated code)
+   */
   public static void logout() {
-  
+
     SecurityContextHolder.getContext().setAuthentication(null);
   }
 

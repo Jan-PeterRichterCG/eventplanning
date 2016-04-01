@@ -45,32 +45,44 @@ import io.oasp.module.security.common.impl.rest.LogoutSuccessHandlerReturningOkH
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Value("${security.cors.enabled}")
-  boolean corsEnabled=false;
-  
+  boolean corsEnabled = false;
+
   @Inject
   private AuthenticationManagerBuilder authenticationManagerBuilder;
 
   @Inject
   private ApplicationAuthenticationProvider authenticationProvider;
 
+  /**
+   * @return (missing JavaDoc in generated code)
+   */
   @Bean
   public AccessControlProvider accessControlProvider() {
 
     return new AccessControlProviderImpl();
   }
 
+  /**
+   * @return (missing JavaDoc in generated code)
+   */
   @Bean
   public AccessControlSchemaProvider accessControlSchemaProvider() {
 
     return new AccessControlSchemaProviderImpl();
   }
 
+  /**
+   * @return (missing JavaDoc in generated code)
+   */
   @Bean
   public CsrfTokenRepository csrfTokenRepository() {
 
     return new HttpSessionCsrfTokenRepository();
   }
 
+  /**
+   * @return (missing JavaDoc in generated code)
+   */
   @Bean
   public static DefaultRolesPrefixPostProcessor defaultRolesPrefixPostProcessor() {
 
@@ -78,7 +90,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // We disable this undesired behavior here...
     return new DefaultRolesPrefixPostProcessor("");
   }
-  
+
   private CorsFilter getCorsFilter() {
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -107,17 +119,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         new String[] { "/login", "/security/**", "/services/rest/login", "/services/rest/logout" };
 
     http
-    //
-    .authenticationProvider(this.authenticationProvider)
+        //
+        .authenticationProvider(this.authenticationProvider)
         // define all urls that are not to be secured
-        .authorizeRequests().antMatchers(unsecuredResources).permitAll().anyRequest()
-        .authenticated()
-        .and()
+        .authorizeRequests().antMatchers(unsecuredResources).permitAll().anyRequest().authenticated().and()
 
         // activate crsf check for a selection of urls (but not for login & logout)
-        .csrf()
-        .requireCsrfProtectionMatcher(new CsrfRequestMatcher())
-        .and()
+        .csrf().requireCsrfProtectionMatcher(new CsrfRequestMatcher()).and()
 
         // configure parameters for simple form login (and logout)
         .formLogin().successHandler(new SimpleUrlAuthenticationSuccessHandler()).defaultSuccessUrl("/")
@@ -129,9 +137,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // register login and logout filter that handles rest logins
         .addFilterAfter(getSimpleRestAuthenticationFilter(), BasicAuthenticationFilter.class)
         .addFilterAfter(getSimpleRestLogoutFilter(), LogoutFilter.class);
-    
-    if (corsEnabled){
-            http.addFilterBefore(getCorsFilter(),CsrfFilter.class);
+
+    if (this.corsEnabled) {
+      http.addFilterBefore(getCorsFilter(), CsrfFilter.class);
     }
   }
 
@@ -157,7 +165,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    * status 200 instead of redirect after login.
    *
    * @return the AuthenticationFilter
-   * @throws Exception
+   * @throws Exception (missing JavaDoc in generated code)
    */
   protected JsonUsernamePasswordAuthenticationFilter getSimpleRestAuthenticationFilter() throws Exception {
 
@@ -176,7 +184,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   /**
    * Init the authenticationManager and simply set users and roles here (to keep things as simplistic as possible).
    *
-   * @throws Exception
+   * @throws Exception (missing JavaDoc in generated code)
    */
   @PostConstruct
   public void init() throws Exception {

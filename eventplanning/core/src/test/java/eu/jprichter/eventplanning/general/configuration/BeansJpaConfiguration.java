@@ -1,15 +1,15 @@
 package eu.jprichter.eventplanning.general.configuration;
 
-import eu.jprichter.eventplanning.general.dataaccess.base.DatabaseMigrator;
-
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManagerFactory;
+// import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import eu.jprichter.eventplanning.general.dataaccess.base.DatabaseMigrator;
 
 /**
  * Java configuration for JPA
@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Configuration;
 // @EnableTransactionManagement
 public class BeansJpaConfiguration {
 
-  private @Autowired EntityManagerFactory entityManagerFactory;
+  // private @Autowired EntityManagerFactory entityManagerFactory;
 
   private @Autowired DataSource appDataSource;
 
@@ -33,6 +33,9 @@ public class BeansJpaConfiguration {
   @Value("${database.migration.clean}")
   private Boolean clean;
 
+  /**
+   * @return (missing JavaDoc in generated code)
+   */
   @Bean
   public DatabaseMigrator getFlyway() {
 
@@ -45,6 +48,9 @@ public class BeansJpaConfiguration {
 
   }
 
+  /**
+   * (missing JavaDoc in generated code)
+   */
   @PostConstruct
   public void migrate() {
 

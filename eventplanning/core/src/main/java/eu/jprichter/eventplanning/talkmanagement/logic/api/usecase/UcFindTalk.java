@@ -6,6 +6,12 @@ import eu.jprichter.eventplanning.talkmanagement.logic.api.to.TalkEto;
 import eu.jprichter.eventplanning.talkmanagement.logic.api.to.TalkSearchCriteriaTo;
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
+/**
+ * This type ... (missing JavaDoc in generated code)
+ *
+ * @author jrichter
+ * @since 0.0.1
+ */
 public interface UcFindTalk {
 
   /**
