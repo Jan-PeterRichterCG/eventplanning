@@ -25,7 +25,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import eu.jprichter.eventplanning.general.common.impl.security.ApplicationAuthenticationProvider;
-import eu.jprichter.eventplanning.general.common.impl.security.CsrfRequestMatcher;
 import io.oasp.module.security.common.api.accesscontrol.AccessControlProvider;
 import io.oasp.module.security.common.base.accesscontrol.AccessControlSchemaProvider;
 import io.oasp.module.security.common.impl.accesscontrol.AccessControlProviderImpl;
@@ -116,7 +115,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   public void configure(HttpSecurity http) throws Exception {
 
     String[] unsecuredResources =
-        new String[] { "/login", "/security/**", "/services/rest/login", "/services/rest/logout" };
+        new String[] { "/login", "/security/**", "/services/rest/login", "/services/rest/logout", "/services/rest/**" };
 
     http
         //
@@ -125,7 +124,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .authorizeRequests().antMatchers(unsecuredResources).permitAll().anyRequest().authenticated().and()
 
         // activate crsf check for a selection of urls (but not for login & logout)
-        .csrf().requireCsrfProtectionMatcher(new CsrfRequestMatcher()).and()
+        // .csrf().requireCsrfProtectionMatcher(new CsrfRequestMatcher()).and()
+
+        // disable CSRF filtering all together
+        .csrf().disable()
 
         // configure parameters for simple form login (and logout)
         .formLogin().successHandler(new SimpleUrlAuthenticationSuccessHandler()).defaultSuccessUrl("/")
