@@ -6,16 +6,25 @@
 
 CREATE SEQUENCE HIBERNATE_SEQUENCE START WITH 1000000;
 
--- *** Staffmemeber ***
+-- *** Talk ***
 CREATE TABLE TALK(
     id BIGINT NOT NULL,
     modificationCounter INTEGER NOT NULL,
     title VARCHAR(255),
     speakerfirstname VARCHAR(255),
-    speakerlastname VARCHAR(255),
+    speakerlastname VARCHAR(255)
 );
 ALTER TABLE TALK ADD CONSTRAINT PK_TALK PRIMARY KEY(id);
 ALTER TABLE TALK ADD CONSTRAINT UC_TITLE UNIQUE(title);
+
+-- *** TimeSlot ***
+CREATE TABLE TIMESLOT(
+    id BIGINT NOT NULL,
+    modificationCounter INTEGER NOT NULL,
+    start TIMESTAMP,
+    end_ TIMESTAMP
+);
+ALTER TABLE TIMESLOT ADD CONSTRAINT PK_TIMESLOT PRIMARY KEY(id);
 
 
 -- *** BinaryObject (BLOBs) ***

@@ -18,11 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 import eu.jprichter.eventplanning.talkmanagement.logic.api.Talkmanagement;
 import eu.jprichter.eventplanning.talkmanagement.logic.api.to.TalkEto;
 import eu.jprichter.eventplanning.talkmanagement.logic.api.to.TalkSearchCriteriaTo;
+import eu.jprichter.eventplanning.talkmanagement.logic.api.to.TimeSlotEto;
+import eu.jprichter.eventplanning.talkmanagement.logic.api.to.TimeSlotSearchCriteriaTo;
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 /**
  * The service class for REST calls in order to execute the methods in {@link Talkmanagement}.
- *
  */
 @Path("/talkmanagement/v1")
 @Named("TalkmanagementRestService")
@@ -115,6 +116,79 @@ public class TalkmanagementRestServiceImpl {
   public PaginatedListTo<TalkEto> findTalksByPost(TalkSearchCriteriaTo searchCriteriaTo) {
 
     return this.talkmanagement.findTalkEtos(searchCriteriaTo);
+  }
+
+  /**
+   * Delegates to {@link Talkmanagement#findTimeSlot}.
+   *
+   * @param id the ID of the {@link TimeSlotEto}
+   * @return the {@link TimeSlotEto}
+   */
+  @GET
+  @Path("/timeslot/{id}/")
+  public TimeSlotEto getTimeSlot(@PathParam("id") String id) {
+
+    Long idAsLong;
+    if (id == null) {
+      throw new BadRequestException("missing id");
+    }
+    try {
+      idAsLong = Long.parseLong(id);
+    } catch (NumberFormatException e) {
+      throw new BadRequestException("id is not a number");
+    } catch (NotFoundException e) {
+      throw new BadRequestException("timeslot not found");
+    }
+    return this.talkmanagement.findTimeSlot(idAsLong);
+  }
+
+  /**
+   * Delegates to {@link Talkmanagement#saveTimeSlot}.
+   *
+   * @param timeslot the {@link TimeSlotEto} to be saved
+   * @return the recently created {@link TimeSlotEto}
+   */
+  @POST
+  @Path("/timeslot/")
+  public TimeSlotEto saveTimeSlot(TimeSlotEto timeslot) {
+
+    return this.talkmanagement.saveTimeSlot(timeslot);
+  }
+
+  /**
+   * Delegates to {@link Talkmanagement#deleteTimeSlot}.
+   *
+   * @param id ID of the {@link TimeSlotEto} to be deleted
+   */
+  @DELETE
+  @Path("/timeslot/{id}/")
+  public void deleteTimeSlot(@PathParam("id") String id) {
+
+    Long idAsLong;
+    if (id == null) {
+      throw new BadRequestException("missing id");
+    }
+    try {
+      idAsLong = Long.parseLong(id);
+    } catch (NumberFormatException e) {
+      throw new BadRequestException("id is not a number");
+    } catch (NotFoundException e) {
+      throw new BadRequestException("timeslot not found");
+    }
+    this.talkmanagement.deleteTimeSlot(idAsLong);
+  }
+
+  /**
+   * Delegates to {@link Talkmanagement#findTimeSlotEtos}.
+   *
+   * @param searchCriteriaTo the pagination and search criteria to be used for finding timeslots.
+   * @return the {@link PaginatedListTo list} of matching {@link TimeSlotEto}s.
+   */
+  @Path("/timeslot/search")
+  @POST
+  public PaginatedListTo<TimeSlotEto> findTimeSlotsByPost(TimeSlotSearchCriteriaTo searchCriteriaTo) {
+
+    return this.talkmanagement.findTimeSlotEtos(searchCriteriaTo);
   }
 
 }
