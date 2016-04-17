@@ -1,6 +1,6 @@
 package eu.jprichter.eventplanning.general.configuration;
 
-import eu.jprichter.eventplanning.SpringBootApp;
+import eu.jprichter.eventplanning.EventplanningApp;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -18,6 +18,6 @@ public class ServletInitializer extends SpringBootServletInitializer {
   @Override
   protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
 
-    return application.sources(SpringBootApp.class);
+    return application.sources(EventplanningApp.class);
   }
 }

@@ -29,6 +29,7 @@ public class TimeSlotEntity extends ApplicationPersistenceEntity implements Time
    * {@inheritDoc}
    */
   @Override
+  @Column(name = "FOO")
   public Instant getStart() {
 
     return this.start;
@@ -47,7 +48,7 @@ public class TimeSlotEntity extends ApplicationPersistenceEntity implements Time
    * {@inheritDoc}
    */
   @Override
-  @Column(name = "end_")
+  @Column(name = "BAR")
   public Instant getEnd() {
 
     return this.end;

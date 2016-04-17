@@ -18,7 +18,7 @@ import io.oasp.module.jpa.dataaccess.api.AdvancedRevisionEntity;
 @SpringBootApplication(exclude = { EndpointAutoConfiguration.class })
 @EntityScan(basePackages = { "eu.jprichter.eventplanning" }, basePackageClasses = { AdvancedRevisionEntity.class })
 @EnableGlobalMethodSecurity(jsr250Enabled = true)
-public class SpringBootApp {
+public class EventplanningApp {
 
   /**
    * Entry point for spring-boot based app
@@ -27,6 +27,6 @@ public class SpringBootApp {
    */
   public static void main(String[] args) {
 
-    SpringApplication.run(SpringBootApp.class, args);
+    SpringApplication.run(EventplanningApp.class, args);
   }
 }
