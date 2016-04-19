@@ -30,6 +30,6 @@ public class JSR310InstantConverter implements AttributeConverter<Instant, Times
     if (value == null) {
       return null;
     }
-    return Instant.ofEpochSecond(value.getTime());
+    return Instant.ofEpochMilli(value.getTime());
   }
 }
