@@ -1,14 +1,15 @@
 package eu.jprichter.eventplanning.general.service.impl.rest;
 
-import java.time.Instant;
-
 import javax.inject.Named;
 
-import com.fasterxml.jackson.databind.jsontype.NamedType;
-// import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.fasterxml.jackson.databind.module.SimpleModule;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import eu.jprichter.eventplanning.general.service.impl.rest.json.InstantJsonSerializer;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.jsontype.NamedType;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
 import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
 
 /**
@@ -19,19 +20,14 @@ import io.oasp.module.rest.service.impl.json.ObjectMapperFactory;
 @Named("ApplicationObjectMapperFactory")
 public class ApplicationObjectMapperFactory extends ObjectMapperFactory {
 
+  private static final Logger LOG = LoggerFactory.getLogger(ApplicationObjectMapperFactory.class);
+
   /**
    * The constructor.
    */
   public ApplicationObjectMapperFactory() {
 
     super();
-
-    // register custom JSON serializer and deserializer
-
-    SimpleModule module = getExtensionModule();
-
-    // module.addDeserializer(Instant.class, new InstantJsonDeserializer());
-    module.addSerializer(Instant.class, new InstantJsonSerializer());
 
     // register polymorphic base classes
 
@@ -40,4 +36,16 @@ public class ApplicationObjectMapperFactory extends ObjectMapperFactory {
     // register mapping for polymorphic sub-classes
 
   }
+
+  @Override
+  public ObjectMapper createInstance() {
+
+    ObjectMapper mapper = super.createInstance();
+
+    mapper.registerModule(new JavaTimeModule());
+    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+    return mapper;
+  }
+
 }
