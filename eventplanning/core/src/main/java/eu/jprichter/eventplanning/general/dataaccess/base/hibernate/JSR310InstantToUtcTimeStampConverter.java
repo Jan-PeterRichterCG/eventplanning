@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @author jrichter
  * @since 0.0.1
  */
-@Converter(autoApply = true)
+@Converter(autoApply = true) // does not work correctly due to daylight saving time problems
 public class JSR310InstantToUtcTimeStampConverter implements AttributeConverter<Instant, Timestamp> {
 
   /** Logger instance. */
