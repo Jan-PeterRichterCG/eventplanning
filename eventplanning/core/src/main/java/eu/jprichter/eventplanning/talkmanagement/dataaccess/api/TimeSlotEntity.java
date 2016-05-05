@@ -6,6 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import eu.jprichter.eventplanning.general.dataaccess.api.ApplicationPersistenceEntity;
 import eu.jprichter.eventplanning.talkmanagement.common.api.TimeSlot;
 
@@ -18,6 +21,8 @@ import eu.jprichter.eventplanning.talkmanagement.common.api.TimeSlot;
 @Entity
 @Table(name = "TimeSlot")
 public class TimeSlotEntity extends ApplicationPersistenceEntity implements TimeSlot {
+
+  private static final Logger LOG = LoggerFactory.getLogger(TimeSlotEntity.class);
 
   private static final long serialVersionUID = 1L;
 
@@ -41,6 +46,8 @@ public class TimeSlotEntity extends ApplicationPersistenceEntity implements Time
   @Override
   public void setStart(Instant start) {
 
+    LOG.debug("XXX Instant start set to: " + start);
+
     this.start = start;
   }
 
@@ -59,6 +66,8 @@ public class TimeSlotEntity extends ApplicationPersistenceEntity implements Time
    */
   @Override
   public void setEnd(Instant end) {
+
+    LOG.debug("XXX Instant end set to: " + end);
 
     this.end = end;
   }

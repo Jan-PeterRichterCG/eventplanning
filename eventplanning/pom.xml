@@ -43,12 +43,37 @@
       </dependency>
 
       <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-entitymanager</artifactId>
+        <version>5.1.0.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>5.1.0.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-envers</artifactId>
+        <version>5.1.0.Final</version>
+      </dependency>
+      <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-java8</artifactId>
+        <version>5.1.0.Final</version>
+      </dependency>
+
+
+
+
+      <!-- Oracle DB Driver -->
+      <dependency>
         <groupId>com.oracle</groupId>
         <artifactId>ojdbc</artifactId>
         <version>10.2.0.4.0</version>
       </dependency>
 
-      <!--    JSON mapping -->
+      <!-- JSON mapping -->
       <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>
         <artifactId>jackson-datatype-jsr310</artifactId>

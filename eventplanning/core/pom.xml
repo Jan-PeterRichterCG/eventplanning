@@ -126,6 +126,12 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
     </dependency>
+    <!-- We are using JSR-310 data types -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-java8</artifactId>
+    </dependency>
+
 
     <!-- Database -->
     <dependency>

@@ -43,8 +43,11 @@ public class UcManageTimeSlotImpl extends AbstractTimeSlotUc implements UcManage
 
     // initialize, validate timeSlotEntity here if necessary
 
+    LOG.debug("XXX (before) start:" + timeSlotEntity.getStart() + "end:" + timeSlotEntity.getEnd());
     getTimeSlotDao().save(timeSlotEntity);
     LOG.debug("TimeSlot with id '{}' has been created.", timeSlotEntity.getId());
+    LOG.debug("XXX (after) start:" + timeSlotEntity.getStart() + "end:" + timeSlotEntity.getEnd());
+
     return getBeanMapper().map(timeSlotEntity, TimeSlotEto.class);
   }
 }
