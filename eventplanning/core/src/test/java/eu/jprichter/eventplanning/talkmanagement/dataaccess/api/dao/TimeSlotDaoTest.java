@@ -1,6 +1,7 @@
 package eu.jprichter.eventplanning.talkmanagement.dataaccess.api.dao;
 
 import java.time.Instant;
+import java.util.TimeZone;
 
 import javax.inject.Inject;
 
@@ -15,7 +16,7 @@ import eu.jprichter.eventplanning.talkmanagement.dataaccess.api.TimeSlotEntity;
 import io.oasp.module.test.common.base.ComponentTest;
 
 /**
- * TODO jrichter This type ...
+ * Test the TimeSlotDao and first of all the mapping of the {@link Instant}s 'start' and 'end' therein.
  *
  * @author jrichter
  * @since 0.0.1
@@ -25,6 +26,22 @@ import io.oasp.module.test.common.base.ComponentTest;
 public class TimeSlotDaoTest extends ComponentTest {
 
   private static Logger LOG = Logger.getLogger(TimeSlotDaoTest.class);
+
+  /**
+   *
+   * This constructor is necessary in order to set the JVM's time zone to UTC so that the mapping of java.time.Instant
+   * <-> SQL TIMESTAMP works properly
+   *
+   * This code is left here intentionally so that it is not forgotten that the hibernate mapping is actually broken
+   */
+  public TimeSlotDaoTest() {
+    super();
+
+    LOG.debug("XXX set default time zone to UTC");
+
+    TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+
+  }
 
   @Inject
   TimeSlotDaoTestHelper timeSlotDaoTestHelper;
