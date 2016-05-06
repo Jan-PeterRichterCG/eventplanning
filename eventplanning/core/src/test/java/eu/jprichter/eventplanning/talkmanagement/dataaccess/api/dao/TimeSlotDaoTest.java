@@ -54,7 +54,10 @@ public class TimeSlotDaoTest extends ComponentTest {
    * point in time '2016-10-30 03:30:00.000' (without Z) is ambiguous in time zone 'Europe/Berlin': daylight saving time
    * ends at '2016-10-30 03:00:00.000' and clocks are set back to '2016-03-27 02:00:00.000'.
    *
-   * Actually, a whole sequence of {@TimeSlot}s are written to the database.
+   * Actually, a whole sequence of {@link TimeSlotEntity}s are written to the database.
+   *
+   * NOTE: This test is not actually free of side effects since it leaves a {{@link TimeSlotEntity} in the table if it
+   * fails. Also the sequence counter for IDs is increased.
    */
   @Test
   @Transactional(propagation = Propagation.REQUIRED)
@@ -68,11 +71,13 @@ public class TimeSlotDaoTest extends ComponentTest {
       timeSlot.setStart(start);
       timeSlot.setEnd(end);
 
+      // write the TimeSlotEntity to the table in a separate transaction
       TimeSlotEntity savedTimeSlot = this.timeSlotDaoTestHelper.saveTimeSlot(timeSlot);
 
       assertThat(timeSlot.getStart()).isEqualTo(savedTimeSlot.getStart());
       assertThat(timeSlot.getEnd()).isEqualTo(savedTimeSlot.getEnd());
 
+      // read back the TimeSlotEntity from the table in a separate transaction
       TimeSlotEntity readTimeSlot = this.timeSlotDaoTestHelper.readTimeSlot(timeSlot.getId());
 
       LOG.debug("XXX saved start: " + savedTimeSlot.getStart() + " end: " + savedTimeSlot.getEnd());
@@ -80,6 +85,9 @@ public class TimeSlotDaoTest extends ComponentTest {
 
       assertThat(savedTimeSlot.getStart()).isEqualTo(readTimeSlot.getStart());
       assertThat(savedTimeSlot.getEnd()).isEqualTo(readTimeSlot.getEnd());
+
+      // delete the TimeSlotEntity from the table in a separate transaction
+      this.timeSlotDaoTestHelper.deleteTimeSlot(timeSlot.getId());
 
       start = Instant.ofEpochSecond(start.getEpochSecond() + 3600);
       end = Instant.ofEpochSecond(end.getEpochSecond() + 3600);

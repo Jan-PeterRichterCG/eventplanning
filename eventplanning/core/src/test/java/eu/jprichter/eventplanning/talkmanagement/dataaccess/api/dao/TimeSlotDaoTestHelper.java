@@ -41,4 +41,13 @@ public class TimeSlotDaoTestHelper {
     return this.timeSlotDao.find(id);
   }
 
+  /**
+   * @param id the id of the TimeSlotEntity to be deleted
+   */
+  @Transactional(propagation = Propagation.REQUIRES_NEW)
+  public void deleteTimeSlot(long id) {
+
+    this.timeSlotDao.delete(id);
+  }
+
 }
